@@ -1,0 +1,90 @@
+<!DOCTYPE html>
+<!DOCTYPE html>
+<html>
+<head>
+	<title>Admin Panel</title>
+	<style type="text/css">
+		#h2 {
+			position: relative;
+			left: 40%;
+			font-family: helvetica;
+			font-size: 35px;
+			text-transform: uppercase;
+		}
+		form {
+			display: block;
+		    margin-left: auto;
+    		margin-right: auto;
+    		width: 75%;
+    		/*border: 2px solid black;*/
+		}
+		#input {
+			width: 90%;
+			height: 40px;
+		}
+		#sub {
+			height: 50px;
+			width: 70px;
+		}
+
+	</style>
+	<!--<script src="angular.js"></script>-->
+</head>
+<body>
+	<h2 id="h2">Admin Panel</h2>
+	<form action="admin.php" method="POST" name="myForm"> 
+		<input type="text" name="query" id="input" placeholder="Type Query Here" required></input>
+		<input type="submit" id="sub" value="Run"/>
+	</form>
+	<?php
+		$host='localhost';
+		$user='root';
+		$pass='';
+		$db='E-Commerce_try';
+		
+		$con=mysqli_connect($host,$user,$pass,$db);
+		if($con)
+			echo "Connection Successful";
+		
+		$sql=$_POST['query'];
+		$query=mysqli_query($con,$sql);
+		
+		if(!$query)
+			echo "Query UnSuccessful" . mysql_error();
+			
+		 while($row = mysql_fetch_array($query, MYSQL_ASSOC)) {
+    			echo "Customer_id :{$row['Customer_id']}  <br> ".
+		        "FirstName : {$row['FirstName']} <br> ".
+        		"LastName : {$row['LastName']} <br> ".
+        		"--------------------------------<br>";
+        }
+        		
+        mysql_close($con);
+			
+	?>
+</body>
+</html>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
